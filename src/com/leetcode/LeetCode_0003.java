@@ -6,6 +6,7 @@ package com.leetcode;
  * @date 2021/11/23 17:26
  */
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
  */
 public class LeetCode_0003 {
 
+    //方法一
     public int lengthOfLongestSubstring(String s) {
         if (s == null) {
             return 0;
@@ -50,10 +52,38 @@ public class LeetCode_0003 {
         return false;
     }
 
+
+    //方法二
+    public int lengthOfLongestSubstring2(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int startIndex = 0;
+        int currentLength = 0;
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            Character ch = s.charAt(i);
+            if (!map.containsKey(ch) || map.get(ch) < startIndex) {
+                map.put(ch, i);
+                currentLength++;
+            } else {
+                if (currentLength > maxLength) {
+                    maxLength = currentLength;
+                }
+                startIndex = map.get(ch) + 1;
+                map.put(ch, i);
+                currentLength = i - startIndex + 1;
+            }
+        }
+        if (currentLength > maxLength) {
+            maxLength = currentLength;
+        }
+        return maxLength;
+    }
+
     public static void main(String[] args) {
-        String s = "aaaaaaa";
+        String s = "abcabcbb";
         LeetCode_0003 leetCode0003 = new LeetCode_0003();
-        int length = leetCode0003.lengthOfLongestSubstring(s);
+        int length = leetCode0003.lengthOfLongestSubstring2(s);
         System.out.println(length);
     }
 }
