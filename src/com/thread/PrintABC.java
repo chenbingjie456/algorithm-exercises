@@ -1,39 +1,39 @@
 package com.thread;
 import java.util.concurrent.locks.*;
-class PrintThread implements Runnable {
-    ReentrantLock lock;
-    String printString;
-    Condition thisCondition;
-    Condition nextCondition;
+
+public class PrintABC {
+
+    class PrintThread implements Runnable {
+        ReentrantLock lock;
+        String printString;
+        Condition thisCondition;
+        Condition nextCondition;
 
 
-    public PrintThread (ReentrantLock lock, Condition thisCondition, Condition nextCondition,   String printString) {
-        this.printString = printString;
-        this.lock = lock;
-        this.thisCondition = thisCondition;
-        this.nextCondition = nextCondition;
-    }
+        public PrintThread (ReentrantLock lock, Condition thisCondition, Condition nextCondition,   String printString) {
+            this.printString = printString;
+            this.lock = lock;
+            this.thisCondition = thisCondition;
+            this.nextCondition = nextCondition;
+        }
 
-    public void run() {
-        lock.lock();
-        try {
-            while (true) {
-                System.out.print(printString);
-                this.nextCondition.signal();
-                this.thisCondition.await();
+        public void run() {
+            lock.lock();
+            try {
+                while (true) {
+                    System.out.print(printString);
+                    this.nextCondition.signal();
+                    this.thisCondition.await();
+                }
+            }catch (Exception e) {
+
+            } finally {
+                lock.unlock();
             }
-        }catch (Exception e) {
-
-        } finally {
-            lock.unlock();
         }
     }
 
-
-}
-public class PrintABC {
-
-    public static void main(String[] args)  {
+    public void test() {
         ReentrantLock lock = new ReentrantLock();
         Condition conditionA = lock.newCondition();
         Condition conditionB = lock.newCondition();
@@ -50,6 +50,10 @@ public class PrintABC {
         } catch (InterruptedException e) {
 
         }
+    }
 
+    public static void main(String[] args)  {
+        PrintABC printABC = new PrintABC();
+        printABC.test();
     }
 }
