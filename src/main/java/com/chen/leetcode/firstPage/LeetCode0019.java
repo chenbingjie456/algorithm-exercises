@@ -4,6 +4,7 @@ import com.chen.leetcode.dto.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * <a href = "https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">19.删除链表的倒数第 N 个结点</a>
@@ -37,13 +38,34 @@ public class LeetCode0019 {
         }
     }
 
+
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        Stack<ListNode> stack = new Stack<>();
+        ListNode prexNode = head;
+        while (prexNode != null) {
+            stack.push(prexNode);
+            prexNode = prexNode.next;
+        }
+        ListNode tempNode = null;
+        while (!stack.isEmpty()) {
+            if (n == 0) {
+                stack.pop().next = tempNode.next;
+                tempNode.next = null;
+                return head;
+            }
+            tempNode = stack.pop();
+            n--;
+        }
+        return head.next;
+    }
+
     public static void main(String[] args) {
         ListNode node0 = new ListNode(1);
 
         ListNode node1 = new ListNode(2);
         node0.next = node1;
         LeetCode0019 code0019 = new LeetCode0019();
-        ListNode head = code0019.removeNthFromEnd(node0, 2);
+        ListNode head = code0019.removeNthFromEnd2(node0, 2);
         System.out.println(1234);
     }
 }

@@ -34,6 +34,17 @@ public class LeetCode0024 {
         return swap(node1, node1.next, node1.next.next, head);
     }
 
+    public ListNode swapPairs2(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = head.next;
+        head.next = swapPairs2(newHead.next);
+        newHead.next = head;
+        return newHead;
+    }
+
+
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
@@ -41,7 +52,7 @@ public class LeetCode0024 {
         head.next.next.next = new ListNode(4);
 
         LeetCode0024 code0024 = new LeetCode0024();
-        ListNode node = code0024.swapPairs(head);
+        ListNode node = code0024.swapPairs2(head);
         System.out.println(node);
     }
 }
