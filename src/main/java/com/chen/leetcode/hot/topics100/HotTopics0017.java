@@ -4,27 +4,36 @@ package com.chen.leetcode.hot.topics100;
  * TODO
  *
  * @author chenbjf
- * @since 2025-06-11 19:51
+ * @since 2025-06-18 19:39
  */
 public class HotTopics0017 {
-
-    public void setZeroes(int[][] matrix) {
-        boolean lineZero = false;
-        boolean columnZero = false;
-        for (int i = 0; i < matrix.length; i++) {
-            if (!lineZero && matrix[i][0] == 0) {
-                lineZero = true;
+    public int firstMissingPositive(int[] nums) {
+        boolean flag = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                flag = true;
+                break;
             }
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (i == 0 && !columnZero && matrix[0][j] == 0) {
-                    columnZero = true;
-                }
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
-                }
+        }
+        if (!flag) {
+            return 1;
+        }
+        for (int i = 0; i < nums.length; i ++) {
+            if (nums[i] <= 0 || nums[i] > nums.length) {
+                nums[i] = 1;
             }
         }
 
+        for (int i = 0; i < nums.length; i ++) {
+            int value = Math.abs(nums[i]) - 1;
+            nums[value] = -Math.abs(nums[value]);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]>0){
+                return i+1;
+            }
+        }
+        return nums.length + 1;
     }
 }

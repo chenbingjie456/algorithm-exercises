@@ -11,11 +11,11 @@ package com.chen.leetcode.hot.topics100;
  */
 public class HotTopics0021 {
 
-    public boolean searchMatrix(int[][] matrix, int target) {
-
-    }
-
-    private int lineSearch(int[][] matrix) {
-
-    }
+//    public boolean searchMatrix(int[][] matrix, int target) {
+//
+//    }
+//
+//    private int lineSearch(int[][] matrix) {
+//
+//    }
 }
