@@ -29,4 +29,25 @@ public class HotTopics0003 {
         }
         return maxLength;
     }
+
+
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> integerSet = new HashSet<>();
+        for (int num : nums) {
+            integerSet.add(num);
+        }
+        int maxLength = 0;
+        for (Integer val : integerSet) {
+            if (!integerSet.contains(val+1)) {
+                int tempValue = val;
+                int length = 0;
+                while (integerSet.contains(tempValue)) {
+                    length++;
+                    tempValue--;
+                }
+                maxLength = Math.max(maxLength, length);
+            }
+        }
+        return maxLength;
+    }
 }

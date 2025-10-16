@@ -55,7 +55,7 @@ public class HotTopics0007 {
     public static void main(String[] args) {
         int[] height = {4,2,0,3,2,5};
         HotTopics0007 hotTopics0007 = new HotTopics0007();
-        int res1 = hotTopics0007.trap2(height);
+        int res1 = hotTopics0007.trap002(height);
         System.out.println(res1);
     }
 
@@ -118,4 +118,70 @@ public class HotTopics0007 {
         }
         return result;
     }
+
+
+
+    public int trap001(int[] height) {
+        int length = height.length;
+        int[] leftMaxArr = new int[length];
+        int[] rightMaxArr = new int[length];
+        int leftMax = height[0];
+        for (int i = 0; i < length; i ++) {
+            leftMax = Math.max(leftMax, height[i]);
+            leftMaxArr[i] = leftMax;
+        }
+        int rightMax = height[length - 1];
+        for (int i = length - 1; i >= 0; i--) {
+            rightMax = Math.max(rightMax, height[i]);
+            rightMaxArr[i] = rightMax;
+        }
+
+        int result = 0;
+        for (int i = 0; i < length; i ++) {
+            if (height[i] < leftMaxArr[i] && height[i] < rightMaxArr[i]) {
+                result+=Math.min(leftMaxArr[i], rightMaxArr[i]) - height[i];
+            }
+        }
+        return result;
+    }
+
+
+    public int trap002(int[] height) {
+        int left = 0, right = height.length - 1;
+        int leftMax = height[left];
+        int rightMax = height[right];
+        int result = 0;
+        while (left < right) {
+            if (leftMax <= rightMax) {
+                leftMax = Math.max(leftMax, height[left]);
+                result += leftMax - height[left];
+                left++;
+            } else {
+                rightMax = Math.max(rightMax, height[right]);
+                result += rightMax - height[right];
+                right--;
+            }
+        }
+        return result;
+    }
+
+
+    public int trap003(int[] height) {
+        Stack<Integer> stack = new Stack<>();
+        int result = 0;
+        for (int i = 0; i < height.length; i++) {
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                int pop = stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+                int width = i - stack.peek() - 1;
+                int h = Math.min(height[i], height[stack.peek()]) - height[pop];
+                result += width * h;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+
 }

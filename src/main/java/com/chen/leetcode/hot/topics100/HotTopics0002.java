@@ -38,4 +38,25 @@ public class HotTopics0002 {
         List<List<String>> result = hotTopics0002.groupAnagrams(str);
         System.out.println(123);
     }
+
+    public List<List<String>> groupAnagrams1(String[] strs) {
+        Map<String, List<String>> mapList = new HashMap<>();
+        for (String str : strs) {
+            String sortStr = sortStr1(str);
+            List<String> list = mapList.getOrDefault(sortStr, new ArrayList<>());
+            list.add(str);
+            mapList.put(sortStr, list);
+        }
+        List<List<String>> resultList = new ArrayList<>();
+        for(Map.Entry<String, List<String>> entry : mapList.entrySet()) {
+            resultList.add(entry.getValue());
+        }
+        return resultList;
+    }
+
+    private String sortStr1(String str) {
+        char[] arr = str.toCharArray();
+        Arrays.sort(arr);
+        return String.copyValueOf(arr);
+    }
 }

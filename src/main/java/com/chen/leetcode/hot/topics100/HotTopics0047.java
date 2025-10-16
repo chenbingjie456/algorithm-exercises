@@ -13,6 +13,6 @@ import com.chen.leetcode.utils.TreeNode;
 public class HotTopics0047 {
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-
+        return null;
     }
 }

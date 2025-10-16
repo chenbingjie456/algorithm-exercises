@@ -22,4 +22,20 @@ public class HotTopics0004 {
             index++;
         }
     }
+
+
+    public void moveZeroes1(int[] nums) {
+        int next = 0; int pre = -1;
+        while (next < nums.length) {
+            if (nums[next] != 0) {
+                nums[++pre] = nums[next];
+            }
+            next++;
+        }
+        int idx = pre+1;
+        while (idx < nums.length) {
+            nums[idx] = 0;
+            idx ++ ;
+        }
+    }
 }

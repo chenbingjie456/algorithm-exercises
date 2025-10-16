@@ -17,6 +17,6 @@ import com.chen.leetcode.utils.TreeNode;
 public class HotTopics0048 {
 
     public int pathSum(TreeNode root, int targetSum) {
-
+        return 0;
     }
 }

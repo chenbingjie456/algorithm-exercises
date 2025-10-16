@@ -34,4 +34,20 @@ public class HotTopics0005 {
         int num = hotTopics0005.maxArea(nums);
         System.out.println(num);
     }
+
+
+    public int maxArea1(int[] height) {
+        int left = 0; int right = height.length - 1;
+        int maxArea = 0;
+        while (left < right) {
+            int value = Math.min(height[left], height[right]) * (right - left);
+            maxArea = Math.max(maxArea, value);
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return maxArea;
+    }
 }
